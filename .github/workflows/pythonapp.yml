@@ -31,8 +31,7 @@ jobs:
         run: python -m pytest tests -v
 
       - name: Run main block of code
-        run: cd lib
         run: |
-           python data_access.py
-     #  - name: Run Deliverable 2 code
-    #     run: |
+          cd library
+          python -m sea_state.py
+    
