@@ -33,11 +33,6 @@ jobs:
        - name: Run main block of code
          run: cd lib
          run: |
-           python Task1A.py
-           python Task1B.py
-           python Task1C.py
-           python Task1D.py
-           python Task1E.py
-           python Task1F.py
+           python data_access.py
      #  - name: Run Deliverable 2 code
     #     run: |
