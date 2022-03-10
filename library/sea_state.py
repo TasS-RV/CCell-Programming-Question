@@ -1,5 +1,6 @@
 from statistics import mean
 from time import time
+from venv import create
 from isort import file
 from data_access import file_explorer
 from matplotlib import pyplot as plt
@@ -44,42 +45,61 @@ def wave_information(sea_state_files):
         
         sum_timedeltas = 0
         timesteps = 0 
+        prev_time = 
         time_steps = []
+        print("Iterating...")
 
+        for n, h in enumerate(heights[1:],1) :
+            print(h)
 
-        for n, h in enumerate(heights):
-
+          
             #Initially, when wav is is rising state, used to detect peak 
             if state == "HIGH":
                 if h > hold_h: #No need for further action, if past one full wave 'fall': can terminate iterating through heights list
                     pass
+                elif h <= hold_h and n == (len(heights)-1):
+                    
+                    state = "LOW" #State switched: peak crossed (wave now falling)
+                    crest.append(hold_h)
+                    trough.append(h) #Ending dip in wave: considered to be falling, complete wave
+
                 elif h <= hold_h:
                     state = "LOW" #State switched: peak crossed (wave now falling)
                     crest.append(hold_h)
+                    
+                else:
+                    trough.append(h)
 
-                 
 
             #If change of wave progression detected: from rising to falling state
             elif state == "LOW":
-                if h < hold_h and n != len(heights): #if this wave is not the last - if wave is falling at last point, taken to be trough
+                if h < hold_h and n != (len(heights)-1): #if this wave is not the last - if wave is falling at last point, taken to be trough
                     pass
                 elif h >= hold_h:
                     state = "HIGH" #State-swtiched: trough crossed (wave now rising)
                     trough.append(hold_h)
                 else:
                     trough.append(hold_h)
+
+
+            #Checking if mean value lies between previous height and current height, and if < prev. but < current - indicates wave rising out of water
+            if (hold_h <= mean_height <= h):
+                sum_timedeltas += (x_values[n] - prev_t)
+                
+                time_steps.append(x_values[n]) #For plotting points - vissualise where mean boundary crossed (removed in final))
+                timesteps += 1 #Less memory compared to using list
+                prev_t = x_values[n]        
+            
+            hold_h = h #Resetting previous value of h
             
         
-            #Checking if mean value lies between previous height and current height, and if < prev. but < current - indicates wave rising out of water
-        #     if (hold_h <= mean_height <= h):
-        #         sum_timedeltas += (x_values[n] - prev_t)
-                
-        #         time_steps.append(x_values[n]) #For plotting points - vissualise where mean boundary crossed (removed in final))
-        #         timesteps += 1 #Less memory compared to using list
-        #         prev_t = x_values[n]
+            
         
-        # tz = sum_timedeltas/ timesteps  #1) First required mean value - mean time step between water crossing up mean height
-        tz = 4
+        tz = sum_timedeltas/ timesteps  #1) First required mean value - mean time step between water crossing up mean height
+        print(crest)
+        print(trough)   #from this bit - data seems to jump up asnd down so much, we might as well consider every consecutive point alternating maxima and minima: try to rewrite the code for this
+        #Very small, rippling aves etc....
+        
         wave_heights = [(high-low) for high, low in zip(crest, trough)]
         sorted_wave_heights = sorted(wave_heights)
         heights_sum = 0
