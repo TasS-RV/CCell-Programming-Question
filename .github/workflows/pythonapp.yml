@@ -33,5 +33,5 @@ jobs:
       - name: Run main block of code
         run: |
           cd library
-          python -m sea_state.py
+          python -m sea_state.py -v
     
