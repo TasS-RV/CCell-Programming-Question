@@ -65,7 +65,7 @@ def wave_information(sea_state_files):
         print("Iterating...")
 
         for n, h in enumerate(heights[1:],1) :
-            print(h)
+           # print(h)
 
           
             #Initially, when wav is is rising state, used to detect peak 
