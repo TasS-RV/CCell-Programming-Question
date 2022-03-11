@@ -14,4 +14,7 @@ A repository for the CCell Renewable Interview question.
 -Please install all required external libraries as per requirements.txt using "pip/conda install -r requirements.txt":
 this file is found in the project root directory. (Only actual, non-standard libraries used are matplotlib and numpy).
 
+-Although messy, I have left all the print statements I used for general debugging, and to test some of the outputs and check if
+trhey were appropriate. These may be useful when checking the outputs of my functionss.
+
 
