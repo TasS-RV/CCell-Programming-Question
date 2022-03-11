@@ -12,6 +12,6 @@ A repository for the CCell Renewable Interview question.
 -Use "python -m sea_state.py" to run the main program file, sea_state.py.
 
 -Please install all required external libraries as per requirements.txt using "pip/conda install -r requirements.txt":
-this file is found in the project root directory.
+this file is found in the project root directory. (Only actual, non-standard libraries used are matplotlib and numpy).
 
 
